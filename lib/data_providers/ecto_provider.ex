@@ -19,7 +19,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   @impl DataProvider
   def create_jwk(%Jwk{} = jwk) do
-    attrs = marshal_from(jwk, Jwk)
+    attrs = marshal_from(jwk)
 
     struct(schema(:jwk))
     |> schema(:jwk).changeset(attrs)
@@ -48,7 +48,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   @impl DataProvider
   def create_nonce(%Nonce{} = nonce) do
-    attrs = marshal_from(nonce, Nonce)
+    attrs = marshal_from(nonce)
 
     struct(schema(:nonce))
     |> schema(:nonce).changeset(attrs)
@@ -73,7 +73,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   @impl ToolDataProvider
   def create_registration(%Registration{} = registration) do
-    attrs = marshal_from(registration, Registration)
+    attrs = marshal_from(registration)
 
     struct(schema(:registration))
     |> schema(:registration).changeset(attrs)
@@ -83,7 +83,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   @impl ToolDataProvider
   def create_deployment(%Deployment{} = deployment) do
-    attrs = marshal_from(deployment, Deployment)
+    attrs = marshal_from(deployment)
 
     struct(schema(:deployment))
     |> schema(:deployment).changeset(attrs)
@@ -134,7 +134,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   @impl ToolDataProvider
   def create_or_update_lti_params(%LtiParams{} = lti_params) do
-    attrs = marshal_from(lti_params, LtiParams)
+    attrs = marshal_from(lti_params)
 
     case repo!().get_by(schema(:lti_params), key: lti_params.key) do
       nil ->
@@ -153,7 +153,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   @impl PlatformDataProvider
   def create_platform_instance(%PlatformInstance{} = platform_instance) do
-    attrs = marshal_from(platform_instance, PlatformInstance)
+    attrs = marshal_from(platform_instance)
 
     struct(schema(:platform_instance))
     |> schema(:platform_instance).changeset(attrs)
@@ -171,7 +171,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   @impl PlatformDataProvider
   def create_login_hint(%LoginHint{} = login_hint) do
-    attrs = marshal_from(login_hint, LoginHint)
+    attrs = marshal_from(login_hint)
 
     struct(schema(:login_hint))
     |> schema(:login_hint).changeset(attrs)
@@ -185,9 +185,8 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
     repo!().delete_all from(h in schema(:login_hint), where: h.inserted_at < ^login_hint_expiry)
   end
 
-  defp marshal_from(data, struct_type, additional_attrs \\ %{}) do
-    struct_type.to_map(data)
-    |> Map.merge(additional_attrs)
+  defp marshal_from(data) do
+    Map.from_struct(data)
   end
 
   defp unmarshal_to({:ok, data}, struct_type) do
