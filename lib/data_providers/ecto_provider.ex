@@ -129,14 +129,14 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
   end
 
   @impl ToolDataProvider
-  def get_lti_params_by_key(key), do: repo!().get_by(schema(:lti_params), key: key)
+  def get_lti_params_by_sub(sub), do: repo!().get_by(schema(:lti_params), sub: sub)
     |> unmarshal_to(LtiParams)
 
   @impl ToolDataProvider
   def create_or_update_lti_params(%LtiParams{} = lti_params) do
     attrs = marshal_from(lti_params)
 
-    case repo!().get_by(schema(:lti_params), key: lti_params.key) do
+    case repo!().get_by(schema(:lti_params), sub: lti_params.sub) do
       nil ->
         struct(schema(:lti_params))
         |> schema(:lti_params).changeset(attrs)
@@ -191,7 +191,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   defp unmarshal_to({:ok, data}, struct_type) do
     map = Map.from_struct(data)
-    {:ok, struct_type.from(map)}
+    {:ok, struct(struct_type, map)}
   end
 
   defp unmarshal_to({:error, maybe_changeset}, _struct_type) do
@@ -204,7 +204,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   defp unmarshal_to(data, struct_type) do
     map = Map.from_struct(data)
-    struct_type.from(map)
+    struct(struct_type, map)
   end
 
   defp maybe_changeset_error_to_str(%Ecto.Changeset{} = changeset) do

@@ -106,13 +106,13 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
       lti_params = all_default_claims()
 
       {:ok, created} = EctoProvider.create_or_update_lti_params(%Lti_1p3.Tool.LtiParams{
-        key: "some-key",
-        data: lti_params,
+        sub: "some-sub",
+        params: lti_params,
         exp: Timex.now() |> Timex.add(Timex.Duration.from_days(1))
       })
 
-      assert created.data == lti_params
-      assert %Lti_1p3.Tool.LtiParams{key: "some-key", data: ^lti_params} = EctoProvider.get_lti_params_by_key("some-key")
+      assert created.params == lti_params
+      assert %Lti_1p3.Tool.LtiParams{sub: "some-sub", params: ^lti_params} = EctoProvider.get_lti_params_by_sub("some-sub")
     end
   end
 

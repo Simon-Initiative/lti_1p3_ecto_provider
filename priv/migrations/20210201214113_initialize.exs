@@ -54,14 +54,14 @@ defmodule Lti_1p3.Test.Repo.Migrations.Initialize do
     create unique_index(:lti_1p3_context_roles, [:uri])
 
     create table(:lti_1p3_params) do
-      add :key, :string
-      add :data, :map
+      add :sub, :string
+      add :params, :map
       add :exp, :utc_datetime
 
       timestamps(type: :timestamptz)
     end
 
-    create unique_index(:lti_1p3_params, [:key])
+    create unique_index(:lti_1p3_params, [:sub])
 
     create table(:lti_1p3_platform_instances) do
       add :name, :string
