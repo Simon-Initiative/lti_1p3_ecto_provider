@@ -52,7 +52,7 @@ defmodule Lti1p3EctoProvider.MixProject do
 
   defp package do
     [
-      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      files: ["lib", "priv", "mix.exs", "README*", "LICENSE*"],
       maintainers: ["Open Learning Initiative"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/Simon-Initiative/lti_1p3_ecto_provider"}
@@ -61,7 +61,7 @@ defmodule Lti1p3EctoProvider.MixProject do
 
   defp docs() do
     [
-      main: "README",
+      main: "readme",
       extras: [
         "README.md",
       ]
