@@ -36,6 +36,12 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
   end
 
   @impl DataProvider
+  def get_all_jwks() do
+    repo!().all(from k in schema(:jwk))
+    |> Enum.map(fn jwk -> unmarshal_to(jwk, Jwk) end)
+  end
+
+  @impl DataProvider
   def get_nonce(value, domain \\ nil) do
     case domain do
       nil ->

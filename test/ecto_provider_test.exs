@@ -20,6 +20,40 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
       assert {:ok, %Lti_1p3.Jwk{pem: ^private_key, active: true}} = EctoProvider.get_active_jwk()
     end
 
+    test "create and get all jwks" do
+      %{private_key: private_key} = Lti_1p3.KeyGenerator.generate_key_pair()
+
+      jwk1 = %Lti_1p3.Jwk{
+        pem: private_key,
+        typ: "JWT",
+        alg: "RS256",
+        kid: UUID.uuid4(),
+        active: false,
+      }
+
+      jwk2 = %Lti_1p3.Jwk{
+        pem: private_key,
+        typ: "JWT",
+        alg: "RS256",
+        kid: UUID.uuid4(),
+        active: true,
+      }
+
+      jwk3 = %Lti_1p3.Jwk{
+        pem: private_key,
+        typ: "JWT",
+        alg: "RS256",
+        kid: UUID.uuid4(),
+        active: true,
+      }
+
+      assert {:ok, %Lti_1p3.Jwk{}} = EctoProvider.create_jwk(jwk1)
+      assert {:ok, %Lti_1p3.Jwk{}} = EctoProvider.create_jwk(jwk2)
+      assert {:ok, %Lti_1p3.Jwk{}} = EctoProvider.create_jwk(jwk3)
+
+      assert EctoProvider.get_all_jwks() |> Enum.map(&(Map.get(&1, :kid))) == [jwk1.kid, jwk2.kid, jwk3.kid]
+    end
+
     test "create and get nonce" do
       nonce = %Lti_1p3.Nonce{
         value: "some value",
