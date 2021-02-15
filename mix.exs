@@ -9,9 +9,13 @@ defmodule Lti1p3EctoProvider.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      description: description(),
+      deps: deps(),
+
       package: package(),
-      deps: deps()
+      description: description(),
+
+      name: "Lti 1p3 Ecto Provider",
+      docs: docs()
     ]
   end
 
@@ -29,7 +33,7 @@ defmodule Lti1p3EctoProvider.MixProject do
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:ecto_sql, "~> 3.1"},
       {:httpoison, "~> 1.6"},
-      {:lti_1p3, git: "https://github.com/Simon-Initiative/lti_1p3.git", branch: "master"},
+      {:lti_1p3, "~> 0.1.0"},
       {:mox, "~> 0.5", only: :test},
       {:postgrex, ">= 0.0.0"},
       {:timex, "~> 3.5"},
@@ -42,16 +46,25 @@ defmodule Lti1p3EctoProvider.MixProject do
 
   defp description do
     """
-    LTI 1.3 Library extension for Ecto data provider support
+    An Ecto-based DataProvider implementation for the Lti_1p3 library
     """
   end
 
   defp package do
     [
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
-      maintainers: ["Eli Knebel"],
+      maintainers: ["Open Learning Initiative"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/Simon-Initiative/lti_1p3_ecto_provider"}
+    ]
+  end
+
+  defp docs() do
+    [
+      main: "README",
+      extras: [
+        "README.md",
+      ]
     ]
   end
 
