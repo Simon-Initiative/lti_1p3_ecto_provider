@@ -25,6 +25,7 @@ use Mix.Config
 # ... existing config
 
 config :lti_1p3,
+  # ...
   provider: Lti_1p3.DataProviders.EctoProvider
   ecto_provider: [
     repo: MyApp.Repo
@@ -34,7 +35,7 @@ config :lti_1p3,
 
 ```
 
-# Migration
+### Migration
 
 You will need to create a migration file to build the required tables for ecto. Please refer to the example migration in [priv/migrations/20210201214113_initialize.exs](./priv/migrations/20210201214113_initialize.exs). If using custom schemas, you will need to tweak this accordingly.
 
