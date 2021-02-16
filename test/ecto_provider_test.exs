@@ -117,6 +117,8 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
       registration = registration_fixture(%{tool_jwk_id: jwk.id})
 
       deployment_id = "some deployment_id"
+      issuer = "https://lti-ri.imsglobal.org"
+      client_id = "12345"
       registration_id = registration.id
       deployment = %Lti_1p3.Tool.Deployment{
         deployment_id: deployment_id,
@@ -125,7 +127,7 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
 
       assert {:ok, %Lti_1p3.Tool.Deployment{deployment_id: ^deployment_id, registration_id: ^registration_id}} = EctoProvider.create_deployment(deployment)
       assert %Lti_1p3.Tool.Deployment{deployment_id: ^deployment_id, registration_id: ^registration_id} = EctoProvider.get_deployment(registration, deployment_id)
-      assert {^registration, %Lti_1p3.Tool.Deployment{deployment_id: ^deployment_id, registration_id: ^registration_id}} = EctoProvider.get_rd_by_deployment_id(deployment_id)
+      assert {^registration, %Lti_1p3.Tool.Deployment{deployment_id: ^deployment_id, registration_id: ^registration_id}} = EctoProvider.get_registration_deployment(issuer, client_id, deployment_id)
     end
 
     test "get jwk by registration" do

@@ -25,3 +25,4 @@ lti_1p3_ecto_provider-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+.DS_Store

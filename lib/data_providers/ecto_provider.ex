@@ -98,7 +98,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
   end
 
   @impl ToolDataProvider
-  def get_rd_by_deployment_id(deployment_id) do
+  def get_registration_deployment(issuer, client_id, deployment_id) do
     case repo!().one from d in schema(:deployment),
       join: r in ^schema(:registration), on: d.registration_id == r.id,
       where: d.deployment_id == ^deployment_id,
