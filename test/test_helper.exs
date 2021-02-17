@@ -15,4 +15,7 @@ Mix.Task.run("ecto.create", ~w(--quiet -r Lti_1p3.DataProviders.EctoProvider.Rep
 Mix.Task.run("ecto.migrate", ~w(--quiet -r Lti_1p3.DataProviders.EctoProvider.Repo))
 
 {:ok, _pid} = Lti_1p3.DataProviders.EctoProvider.Repo.start_link()
+
+Mix.Task.run("ecto.seed", ~w(--quiet -r Lti_1p3.DataProviders.EctoProvider.Repo))
+
 Ecto.Adapters.SQL.Sandbox.mode(Lti_1p3.DataProviders.EctoProvider.Repo, :manual)

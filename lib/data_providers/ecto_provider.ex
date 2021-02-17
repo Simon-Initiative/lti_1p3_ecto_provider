@@ -101,7 +101,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
   def get_registration_deployment(issuer, client_id, deployment_id) do
     case repo!().one from d in schema(:deployment),
       join: r in ^schema(:registration), on: d.registration_id == r.id,
-      where: d.deployment_id == ^deployment_id,
+      where: r.issuer == ^issuer and r.client_id == ^client_id and d.deployment_id == ^deployment_id,
       select: {r, d} do
       nil ->
         nil

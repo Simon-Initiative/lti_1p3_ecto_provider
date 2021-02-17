@@ -16,7 +16,7 @@ alias Lti_1p3.DataProviders.EctoProvider.Repo
 # create a default active lti_1p3 jwk
 if !Repo.get_by(EctoProvider.Jwk, id: 1) do
   %{private_key: private_key} = Lti_1p3.KeyGenerator.generate_key_pair()
-  {:ok, _jwk} = EctoProvider.create_jwk(%{
+  {:ok, _jwk} = EctoProvider.create_jwk(%Lti_1p3.Jwk{
     pem: private_key,
     typ: "JWT",
     alg: "RS256",
@@ -27,14 +27,16 @@ end
 
 # create lti_1p3 platform roles
 if !Repo.get_by(EctoProvider.PlatformRole, id: 1) do
-  Lti_1p3.PlatformRoles.list_roles()
-  |> Enum.map(&Lti_1p3.PlatformRole.changeset/1)
+  Lti_1p3.Tool.PlatformRoles.list_roles()
+  |> Enum.map(fn t -> struct(EctoProvider.PlatformRole, Map.from_struct(t)) end)
+  |> Enum.map(&EctoProvider.PlatformRole.changeset/1)
   |> Enum.map(fn t -> Repo.insert!(t, on_conflict: :replace_all, conflict_target: :id) end)
 end
 
 # create lti_1p3 context roles
 if !Repo.get_by(EctoProvider.ContextRole, id: 1) do
-  Lti_1p3.ContextRoles.list_roles()
-  |> Enum.map(&Lti_1p3.ContextRole.changeset/1)
+  Lti_1p3.Tool.ContextRoles.list_roles()
+  |> Enum.map(fn t -> struct(EctoProvider.ContextRole, Map.from_struct(t)) end)
+  |> Enum.map(&EctoProvider.ContextRole.changeset/1)
   |> Enum.map(fn t -> Repo.insert!(t, on_conflict: :replace_all, conflict_target: :id) end)
 end

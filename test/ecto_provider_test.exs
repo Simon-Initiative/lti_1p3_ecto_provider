@@ -21,6 +21,7 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
     end
 
     test "create and get all jwks" do
+      {:ok, active_jwk} = EctoProvider.get_active_jwk()
       %{private_key: private_key} = Lti_1p3.KeyGenerator.generate_key_pair()
 
       jwk1 = %Lti_1p3.Jwk{
@@ -51,7 +52,7 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
       assert {:ok, %Lti_1p3.Jwk{}} = EctoProvider.create_jwk(jwk2)
       assert {:ok, %Lti_1p3.Jwk{}} = EctoProvider.create_jwk(jwk3)
 
-      assert EctoProvider.get_all_jwks() |> Enum.map(&(Map.get(&1, :kid))) == [jwk1.kid, jwk2.kid, jwk3.kid]
+      assert EctoProvider.get_all_jwks() |> Enum.map(&(Map.get(&1, :kid))) == [active_jwk.kid, jwk1.kid, jwk2.kid, jwk3.kid]
     end
 
     test "create and get nonce" do
