@@ -26,10 +26,12 @@ defmodule Lti_1p3.DataProviders.EctoProvider.Marshaler do
 
   def to(%ContextRole{} = t) do
     struct(EctoProvider.ContextRole, Map.from_struct(t))
+    |> Ecto.put_meta(state: :loaded)
   end
 
   def to(%PlatformRole{} = t) do
     struct(EctoProvider.PlatformRole, Map.from_struct(t))
+    |> Ecto.put_meta(state: :loaded)
   end
 
   def to(%Deployment{} = t) do
