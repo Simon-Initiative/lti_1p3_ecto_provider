@@ -12,6 +12,22 @@ defmodule Lti_1p3.DataProviders.EctoProvider.Marshaler do
   alias Lti_1p3.Platform.LoginHint
   alias Lti_1p3.DataProviders.EctoProvider
 
+  @doc """
+  Converts an Lti_1p3 struct to an EctoProvider struct.
+  ## Examples
+      iex> Marshaler.to(%Lti_1p3.Jwk{})
+      %Lti_1p3.DataProviders.EctoProvider.Jwk{}
+
+  If a list of Lti_1p3 structs is provided, each item in the list is
+  converted and returned as a list of EctoProvider structs
+      iex> Marshaler.to([%Lti_1p3.Jwk{}])
+      [%Lti_1p3.DataProviders.EctoProvider.Jwk{}]
+
+  If ContextRole or PlatformRole struct is provided, the ecto struct metadata will be
+  set to state: :loaded as though the role was retrieved from the database.
+  This guarantees any assoc updates will not result in new role records created
+  but instead use the existing role records created by the seed.
+  """
   def to(items) when is_list(items) do
     Enum.map(items, fn t -> EctoProvider.Marshaler.to(t) end)
   end
@@ -51,6 +67,17 @@ defmodule Lti_1p3.DataProviders.EctoProvider.Marshaler do
   end
 
 
+  @doc """
+  Converts an EctoProvider struct to an Lti_1p3 struct.
+  ## Examples
+      iex> Marshaler.from(%Lti_1p3.DataProviders.EctoProvider.Jwk{})
+      %Lti_1p3.Jwk{}
+
+  If a list of EctoProvider structs is provided, each item in the list is
+  converted and returned as a list of Lti_1p3 structs
+      iex> Marshaler.to([%Lti_1p3.DataProviders.EctoProvider.Jwk{}])
+      [%Lti_1p3.Jwk{}]
+  """
   def from(items) when is_list(items) do
     Enum.map(items, fn t -> EctoProvider.Marshaler.from(t) end)
   end
