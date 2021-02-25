@@ -135,14 +135,14 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
   end
 
   @impl ToolDataProvider
-  def get_lti_params_by_sub(sub), do: repo!().get_by(schema(:lti_params), sub: sub)
+  def get_lti_params_by_key(key), do: repo!().get_by(schema(:lti_params), key: key)
     |> unmarshal_to(LtiParams)
 
   @impl ToolDataProvider
-  def create_or_update_lti_params(%LtiParams{} = lti_params) do
+  def create_or_update_lti_params(%LtiParams{key: key} = lti_params) do
     attrs = marshal_from(lti_params)
 
-    case repo!().get_by(schema(:lti_params), sub: lti_params.sub) do
+    case repo!().get_by(schema(:lti_params), key: key) do
       nil ->
         struct(schema(:lti_params))
         |> schema(:lti_params).changeset(attrs)

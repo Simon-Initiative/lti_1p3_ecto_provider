@@ -39,7 +39,7 @@ config :lti_1p3,
 
 ### Migration
 
-You will need to create a migration file to build the required tables for ecto. Please refer to the example migration in [priv/migrations/20210201214113_initialize.exs](https://github.com/Simon-Initiative/lti_1p3_ecto_provider/blob/master/priv/migrations/20210201214113_initialize.exs). If using custom schemas, you will need to tweak this accordingly.
+You will need to create a migration file to build the required tables for ecto. Please refer to the example migrations in [priv/repo/migrations](https://github.com/Simon-Initiative/lti_1p3_ecto_provider/blob/master/priv/repo/migrations). If using custom schemas, you will need to tweak these accordingly.
 
 ### Custom Schemas
 

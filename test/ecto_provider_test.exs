@@ -143,13 +143,13 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
       lti_params = all_default_claims()
 
       {:ok, created} = EctoProvider.create_or_update_lti_params(%Lti_1p3.Tool.LtiParams{
-        sub: "some-sub",
+        key: "some-key",
         params: lti_params,
         exp: Timex.now() |> Timex.add(Timex.Duration.from_days(1))
       })
 
       assert created.params == lti_params
-      assert %Lti_1p3.Tool.LtiParams{sub: "some-sub", params: ^lti_params} = EctoProvider.get_lti_params_by_sub("some-sub")
+      assert %Lti_1p3.Tool.LtiParams{key: "some-key", params: ^lti_params} = EctoProvider.get_lti_params_by_key("some-key")
     end
   end
 
@@ -204,7 +204,6 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
       assert EctoProvider.get_login_hint_by_value(login_hint.value) == nil
     end
 
-    # @callback delete_expired_login_hints(integer() | nil) :: any()
   end
 
 end

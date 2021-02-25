@@ -3,7 +3,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider.LtiParams do
   import Ecto.Changeset
 
   schema "lti_1p3_params" do
-    field :sub, :string
+    field :key, :string
     field :params, :map
     field :exp, :utc_datetime
 
@@ -13,8 +13,8 @@ defmodule Lti_1p3.DataProviders.EctoProvider.LtiParams do
   @doc false
   def changeset(nonce, attrs) do
     nonce
-    |> cast(attrs, [:sub, :params, :exp])
-    |> validate_required([:sub, :params, :exp])
-    |> unique_constraint(:sub)
+    |> cast(attrs, [:key, :params, :exp])
+    |> validate_required([:key, :params, :exp])
+    |> unique_constraint(:key)
   end
 end
