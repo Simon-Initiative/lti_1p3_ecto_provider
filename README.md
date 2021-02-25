@@ -1,5 +1,10 @@
 # Lti 1p3 Ecto Provider
 
+[![Hex.pm](https://img.shields.io/hexpm/v/lti_1p3_ecto_provider)](https://hex.pm/packages/lti_1p3_ecto_provider)
+[![GitHub](https://img.shields.io/github/license/Simon-Initiative/lti_1p3_ecto_provider?color=blue)](https://github.com/Simon-Initiative/lti_1p3_ecto_provider/blob/master/LICENSE)
+[![Build & Test](https://github.com/Simon-Initiative/lti_1p3_ecto_provider/actions/workflows/main.yml/badge.svg)](https://github.com/Simon-Initiative/lti_1p3_ecto_provider/actions/workflows/main.yml)
+[![Coverage Status](https://coveralls.io/repos/github/Simon-Initiative/lti_1p3_ecto_provider/badge.svg?branch=master)](https://coveralls.io/github/Simon-Initiative/lti_1p3_ecto_provider?branch=master)
+
 An Ecto-based DataProvider implementation for the Lti_1p3 library.
 
 ## Installation
