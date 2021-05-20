@@ -4,8 +4,8 @@ defmodule Lti1p3EctoProvider.MixProject do
   def project do
     [
       app: :lti_1p3_ecto_provider,
-      version: "0.2.1",
-      elixir: "~> 1.11",
+      version: "0.2.2",
+      elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       elixirc_options: elixirc_options(Mix.env()),
       start_permanent: Mix.env() == :prod,
@@ -44,7 +44,7 @@ defmodule Lti1p3EctoProvider.MixProject do
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:ecto_sql, "~> 3.1"},
       {:httpoison, "~> 1.6"},
-      {:lti_1p3, "~> 0.3.1"},
+      {:lti_1p3, "~> 0.3.2"},
       {:mox, "~> 0.5", only: :test},
       {:postgrex, ">= 0.0.0"},
       {:timex, "~> 3.5"},
