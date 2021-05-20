@@ -26,8 +26,8 @@ jobs:
       - name: 🧪 Setup elixir
         uses: erlef/setup-elixir@v1
         with:
-          elixir-version: 1.11.1 # Define the elixir version [required]
-          otp-version: 23.1 # Define the OTP version [required]
+          elixir-version: 1.12.0 # Define the elixir version [required]
+          otp-version: 24.0 # Define the OTP version [required]
 
       - name: ⬇️ Install elixir dependencies
         run: mix deps.get
@@ -39,4 +39,4 @@ jobs:
         run: mix clean && mix compile --warnings-as-errors
 
       - name: ▶️ Run tests
-        run: mix coveralls.github
+        run: mix test
