@@ -4,7 +4,7 @@ defmodule Lti1p3EctoProvider.MixProject do
   def project do
     [
       app: :lti_1p3_ecto_provider,
-      version: "0.2.2",
+      version: "0.2.3",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
       elixirc_options: elixirc_options(Mix.env()),
@@ -21,10 +21,8 @@ defmodule Lti1p3EctoProvider.MixProject do
         "coveralls.html": :test,
         "coveralls.xml": :test
       ],
-
       package: package(),
       description: description(),
-
       name: "Lti 1p3 Ecto Provider",
       docs: docs()
     ]
@@ -44,11 +42,12 @@ defmodule Lti1p3EctoProvider.MixProject do
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:ecto_sql, "~> 3.1"},
       {:httpoison, "~> 1.6"},
-      {:lti_1p3, "~> 0.3.2"},
+      # {:lti_1p3, "~> 0.3.3"},
+      {:lti_1p3, github: "Simon-Initiative/lti_1p3", branch: "0.3.3"},
       {:mox, "~> 0.5", only: :test},
       {:postgrex, ">= 0.0.0"},
       {:timex, "~> 3.5"},
-      {:uuid, "~> 1.1" },
+      {:uuid, "~> 1.1"}
     ]
   end
 
@@ -78,7 +77,7 @@ defmodule Lti1p3EctoProvider.MixProject do
     [
       main: "readme",
       extras: [
-        "README.md",
+        "README.md"
       ]
     ]
   end
@@ -97,7 +96,7 @@ defmodule Lti1p3EctoProvider.MixProject do
       test: ["test"],
 
       # runs tests in deterministic order, only shows one failure at a time and reruns tests if any changes are made
-      "test.watch": ["test.watch --stale --max-failures 1 --trace --seed 0"],
+      "test.watch": ["test.watch --stale --max-failures 1 --trace --seed 0"]
     ]
   end
 end
