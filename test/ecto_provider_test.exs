@@ -138,19 +138,6 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
 
       assert %Lti_1p3.Jwk{id: ^jwk_id} = EctoProvider.get_jwk_by_registration(registration)
     end
-
-    test "create and get lti params by key" do
-      lti_params = all_default_claims()
-
-      {:ok, created} = EctoProvider.create_or_update_lti_params(%Lti_1p3.Tool.LtiParams{
-        key: "some-key",
-        params: lti_params,
-        exp: Timex.now() |> Timex.add(Timex.Duration.from_days(1))
-      })
-
-      assert created.params == lti_params
-      assert %Lti_1p3.Tool.LtiParams{key: "some-key", params: ^lti_params} = EctoProvider.get_lti_params_by_key("some-key")
-    end
   end
 
   describe "platform data provider" do

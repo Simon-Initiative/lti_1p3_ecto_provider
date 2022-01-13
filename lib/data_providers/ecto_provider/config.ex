@@ -30,19 +30,19 @@ defmodule Lti_1p3.DataProviders.EctoProvider.Config do
   Gets the default configurations lti_1p3
   """
   @spec default_config() :: config()
-  def default_config(), do: [
-    schemas: [
-      registration: :"Elixir.Lti_1p3.DataProviders.EctoProvider.Registration",
-      platform_instance: :"Elixir.Lti_1p3.DataProviders.EctoProvider.PlatformInstance",
-      lti_params: :"Elixir.Lti_1p3.DataProviders.EctoProvider.LtiParams",
-      login_hint: :"Elixir.Lti_1p3.DataProviders.EctoProvider.LoginHint",
-      nonce: :"Elixir.Lti_1p3.DataProviders.EctoProvider.Nonce",
-      jwk: :"Elixir.Lti_1p3.DataProviders.EctoProvider.Jwk",
-      deployment: :"Elixir.Lti_1p3.DataProviders.EctoProvider.Deployment",
-      platform_role: :"Elixir.Lti_1p3.DataProviders.EctoProvider.PlatformRole",
-      context_role: :"Elixir.Lti_1p3.DataProviders.EctoProvider.ContextRole",
+  def default_config(),
+    do: [
+      schemas: [
+        registration: :"Elixir.Lti_1p3.DataProviders.EctoProvider.Registration",
+        platform_instance: :"Elixir.Lti_1p3.DataProviders.EctoProvider.PlatformInstance",
+        login_hint: :"Elixir.Lti_1p3.DataProviders.EctoProvider.LoginHint",
+        nonce: :"Elixir.Lti_1p3.DataProviders.EctoProvider.Nonce",
+        jwk: :"Elixir.Lti_1p3.DataProviders.EctoProvider.Jwk",
+        deployment: :"Elixir.Lti_1p3.DataProviders.EctoProvider.Deployment",
+        platform_role: :"Elixir.Lti_1p3.DataProviders.EctoProvider.PlatformRole",
+        context_role: :"Elixir.Lti_1p3.DataProviders.EctoProvider.ContextRole"
+      ]
     ]
-  ]
 
   @doc """
   Gets the environment configuration for key :lti_1p3 in app's environment
@@ -73,7 +73,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider.Config do
   @spec schema(atom()) :: atom()
   def schema(name) do
     get(:schemas)
-    |> Keyword.get(name) || raise ConfigError, message: "Invalid schema configuration for `:#{name}`."
+    |> Keyword.get(name) ||
+      raise ConfigError, message: "Invalid schema configuration for `:#{name}`."
   end
-
 end
