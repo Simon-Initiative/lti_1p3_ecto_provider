@@ -57,7 +57,6 @@ config :lti_1p3,
     schemas: [
       registration: MyApp.DataProviders.EctoProvider.CustomRegistration,
       platform_instance: MyApp.DataProviders.EctoProvider.CustomPlatformInstance,
-      lti_params: MyApp.DataProviders.EctoProvider.CustomLtiParams,
       login_hint: MyApp.DataProviders.EctoProvider.CustomLoginHint,
       nonce: MyApp.DataProviders.EctoProvider.CustomNonce,
       jwk: MyApp.DataProviders.EctoProvider.CustomJwk,
