@@ -1,0 +1,43 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+" # production release tags vX.Y.Z
+      - "v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+" # release candidate tags vX.Y.Z-rc1
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v2
+
+      - name: 🧪 Setup elixir
+        uses: erlef/setup-elixir@v1
+        with:
+          elixir-version: 1.12.0 # Define the elixir version [required]
+          otp-version: 24.0 # Define the OTP version [required]
+
+      - name: ⬇️ Install elixir dependencies
+        run: mix deps.get
+
+      - name: 🔨 Build dependencies
+        run: mix deps.compile
+
+      - name: 🚀 Publish package to hex.pm
+        env:
+          HEX_API_KEY: ${{ secrets.HEX_API_KEY }}
+        run: |
+          if [[ -z "${HEX_API_KEY}" ]]; then
+            echo "HEX_API_KEY is not set" && exit 1
+          fi
+
+          echo "===> Build hex package"
+          echo 
+          mix hex.build
+
+          echo "===> Publishing hex package"
+          echo
+          mix hex.publish --yes
