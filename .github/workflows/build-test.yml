@@ -18,9 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: 🔧 Configure
-        run: |
-          cp postgres.example.env postgres.env
-          EOL
+        run: cp postgres.example.env postgres.env
 
       - name: 🗄 Start test database
         run: docker-compose up -d postgres
