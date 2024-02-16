@@ -17,6 +17,14 @@ jobs:
       - name: 🛎️ Checkout
         uses: actions/checkout@v2
 
+      - name: 🔧 Configure
+        run: |
+          cp postgres.example.env postgres.env
+          EOL
+
+      - name: 🗄 Start test database
+        run: docker-compose up -d postgres
+
       - name: 🧪 Setup elixir
         uses: erlef/setup-elixir@v1
         with:
