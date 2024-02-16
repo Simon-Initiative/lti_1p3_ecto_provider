@@ -1,9 +1,9 @@
-use Mix.Config
+import Config
 
 config :lti_1p3,
   provider: Lti_1p3.DataProviders.EctoProvider,
   ecto_provider: [
-    repo: Lti_1p3.DataProviders.EctoProvider.Repo,
+    repo: Lti_1p3.DataProviders.EctoProvider.Repo
   ]
 
 config :lti_1p3_ecto_provider, Lti_1p3.DataProviders.EctoProvider.Repo,
