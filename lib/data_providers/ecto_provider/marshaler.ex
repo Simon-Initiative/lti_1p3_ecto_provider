@@ -66,7 +66,6 @@ defmodule Lti_1p3.DataProviders.EctoProvider.Marshaler do
     struct(EctoProvider.LoginHint, Map.from_struct(t))
   end
 
-
   @doc """
   Converts an EctoProvider struct to an Lti_1p3 struct.
   ## Examples
