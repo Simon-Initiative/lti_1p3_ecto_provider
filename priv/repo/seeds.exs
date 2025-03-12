@@ -27,7 +27,7 @@ end
 
 # create lti_1p3 platform roles
 if !Repo.get_by(EctoProvider.PlatformRole, id: 1) do
-  Lti_1p3.Tool.PlatformRoles.list_roles()
+  Lti_1p3.Roles.PlatformRoles.list_roles()
   |> Enum.map(fn t -> struct(EctoProvider.PlatformRole, Map.from_struct(t)) end)
   |> Enum.map(&EctoProvider.PlatformRole.changeset/1)
   |> Enum.map(fn t -> Repo.insert!(t, on_conflict: :replace_all, conflict_target: :id) end)
@@ -35,7 +35,7 @@ end
 
 # create lti_1p3 context roles
 if !Repo.get_by(EctoProvider.ContextRole, id: 1) do
-  Lti_1p3.Tool.ContextRoles.list_roles()
+  Lti_1p3.Roles.ContextRoles.list_roles()
   |> Enum.map(fn t -> struct(EctoProvider.ContextRole, Map.from_struct(t)) end)
   |> Enum.map(&EctoProvider.ContextRole.changeset/1)
   |> Enum.map(fn t -> Repo.insert!(t, on_conflict: :replace_all, conflict_target: :id) end)

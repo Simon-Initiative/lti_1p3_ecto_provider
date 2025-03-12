@@ -4,8 +4,8 @@ defmodule Lti_1p3.DataProviders.EctoProvider.Marshaler do
   """
   alias Lti_1p3.Jwk
   alias Lti_1p3.Nonce
-  alias Lti_1p3.Tool.ContextRole
-  alias Lti_1p3.Tool.PlatformRole
+  alias Lti_1p3.Roles.ContextRole
+  alias Lti_1p3.Roles.PlatformRole
   alias Lti_1p3.Tool.Deployment
   alias Lti_1p3.Tool.Registration
   alias Lti_1p3.Platform.PlatformInstance
@@ -65,7 +65,6 @@ defmodule Lti_1p3.DataProviders.EctoProvider.Marshaler do
   def to(%LoginHint{} = t) do
     struct(EctoProvider.LoginHint, Map.from_struct(t))
   end
-
 
   @doc """
   Converts an EctoProvider struct to an Lti_1p3 struct.
