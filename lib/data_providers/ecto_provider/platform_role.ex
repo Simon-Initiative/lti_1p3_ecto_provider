@@ -3,7 +3,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider.PlatformRole do
   import Ecto.Changeset
 
   schema "lti_1p3_platform_roles" do
-    field :uri, :string
+    field(:uri, :string)
   end
 
   @doc false
@@ -14,4 +14,10 @@ defmodule Lti_1p3.DataProviders.EctoProvider.PlatformRole do
     |> unique_constraint(:uri)
   end
 
+  defimpl Jason.Encoder do
+    @impl Jason.Encoder
+    def encode(value, opts) do
+      Jason.Encode.string(value.uri, opts)
+    end
+  end
 end
