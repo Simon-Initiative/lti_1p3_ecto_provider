@@ -239,9 +239,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
   end
 
   defp unmarshal_to({:ok, data}, LoginHint) do
-    map = Map.from_struct(data)
-    map = Map.update!(map, :context, &decode_context/1)
-    {:ok, struct(LoginHint, map)}
+    {:ok, unmarshal_to(data, LoginHint)}
   end
 
   defp unmarshal_to({:ok, data}, struct_type) do
@@ -255,6 +253,13 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   defp unmarshal_to(nil, _struct_type) do
     nil
+  end
+
+  defp unmarshal_to(data, LoginHint) do
+    map = Map.from_struct(data)
+    map = Map.update!(map, :context, &decode_context/1)
+
+    struct(LoginHint, map)
   end
 
   defp unmarshal_to(data, struct_type) do
