@@ -4,7 +4,7 @@ defmodule Lti1p3EctoProvider.MixProject do
   def project do
     [
       app: :lti_1p3_ecto_provider,
-      version: "0.7.0",
+      version: "0.7.1",
       elixir: "~> 1.17",
       elixirc_paths: elixirc_paths(Mix.env()),
       elixirc_options: elixirc_options(Mix.env()),
