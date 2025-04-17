@@ -245,6 +245,18 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
              } = EctoProvider.get_login_hint_by_value("some value")
     end
 
+    test "throws error when context is no support type" do
+      login_hint = %Lti_1p3.Platform.LoginHint{
+        value: "some value",
+        session_user_id: 1,
+        context: []
+      }
+
+      assert_raise ArgumentError, fn ->
+        EctoProvider.create_login_hint(login_hint)
+      end
+    end
+
     test "delete expired login hints" do
       {:ok, login_hint} =
         EctoProvider.create_login_hint(%Lti_1p3.Platform.LoginHint{

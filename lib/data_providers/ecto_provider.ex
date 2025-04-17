@@ -212,6 +212,9 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
     nil
   end
 
+  defp encode_context(context),
+    do: raise(ArgumentError, "context must be a map, binary or nil. Got #{inspect(context)}")
+
   defp decode_context(context) do
     case context do
       nil ->
