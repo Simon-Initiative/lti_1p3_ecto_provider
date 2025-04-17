@@ -207,7 +207,7 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
                EctoProvider.get_login_hint_by_value("some value")
     end
 
-    test "create and get login hint with map" do
+    test "create and get login hint with context map" do
       login_hint = %Lti_1p3.Platform.LoginHint{
         value: "some value",
         session_user_id: 1,
@@ -223,6 +223,25 @@ defmodule Lti_1p3.DataProviders.EctoProviderTest do
       assert %Lti_1p3.Platform.LoginHint{
                value: "some value",
                context: %{"some" => "context", "with" => "map"}
+             } = EctoProvider.get_login_hint_by_value("some value")
+    end
+
+    test "create and get login hint with nil context" do
+      login_hint = %Lti_1p3.Platform.LoginHint{
+        value: "some value",
+        session_user_id: 1,
+        context: nil
+      }
+
+      assert {:ok,
+              %Lti_1p3.Platform.LoginHint{
+                value: "some value",
+                context: nil
+              }} = EctoProvider.create_login_hint(login_hint)
+
+      assert %Lti_1p3.Platform.LoginHint{
+               value: "some value",
+               context: nil
              } = EctoProvider.get_login_hint_by_value("some value")
     end
 
