@@ -200,8 +200,49 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
     repo!().delete_all(from(h in schema(:login_hint), where: h.inserted_at < ^login_hint_expiry))
   end
 
+  defp encode_context(context) when is_map(context) do
+    URI.encode_query(context)
+  end
+
+  defp encode_context(context) when is_binary(context) do
+    context
+  end
+
+  defp encode_context(context) when is_nil(context) do
+    nil
+  end
+
+  defp encode_context(context),
+    do: raise(ArgumentError, "context must be a map, binary or nil. Got #{inspect(context)}")
+
+  defp decode_context(context) do
+    case context do
+      nil ->
+        nil
+
+      _ ->
+        decoded =
+          context
+          |> URI.decode_query()
+
+        case Map.values(decoded) do
+          [""] -> Map.keys(decoded) |> hd()
+          _ -> decoded
+        end
+    end
+  end
+
+  defp marshal_from(%LoginHint{context: context} = data) do
+    Map.from_struct(data)
+    |> Map.put(:context, encode_context(context))
+  end
+
   defp marshal_from(data) do
     Map.from_struct(data)
+  end
+
+  defp unmarshal_to({:ok, data}, LoginHint) do
+    {:ok, unmarshal_to(data, LoginHint)}
   end
 
   defp unmarshal_to({:ok, data}, struct_type) do
@@ -215,6 +256,13 @@ defmodule Lti_1p3.DataProviders.EctoProvider do
 
   defp unmarshal_to(nil, _struct_type) do
     nil
+  end
+
+  defp unmarshal_to(data, LoginHint) do
+    map = Map.from_struct(data)
+    map = Map.update!(map, :context, &decode_context/1)
+
+    struct(LoginHint, map)
   end
 
   defp unmarshal_to(data, struct_type) do
