@@ -31,7 +31,6 @@ defmodule Lti_1p3.DataProviders.EctoProvider.PlatformInstance do
       :custom_params
     ])
     |> validate_required([
-      :guid,
       :name,
       :client_id,
       :target_link_uri,
