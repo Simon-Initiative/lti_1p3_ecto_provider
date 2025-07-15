@@ -32,7 +32,8 @@ defmodule Lti1p3EctoProvider.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {Lti1p3EctoProvider.Application, []}
     ]
   end
 
@@ -43,8 +44,7 @@ defmodule Lti1p3EctoProvider.MixProject do
       {:ex_doc, "~> 0.23", only: :dev, runtime: false},
       {:ecto_sql, "~> 3.10"},
       {:httpoison, "~> 2.0"},
-      # {:lti_1p3, "~> 0.8"},
-      {:lti_1p3, git: "git@github.com:Simon-Initiative/lti_1p3.git", ref: "fix-for-deep-linking"},
+      {:lti_1p3, "~> 0.9"},
       {:mox, "~> 0.5", only: :test},
       {:postgrex, ">= 0.0.0"},
       {:timex, "~> 3.5"},
