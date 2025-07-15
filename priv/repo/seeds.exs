@@ -10,6 +10,9 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+# Ensure the application is started
+Application.ensure_all_started(:lti_1p3_ecto_provider)
+
 alias Lti_1p3.DataProviders.EctoProvider
 alias Lti_1p3.DataProviders.EctoProvider.Repo
 

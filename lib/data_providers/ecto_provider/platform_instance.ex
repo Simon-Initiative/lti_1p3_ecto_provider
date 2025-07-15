@@ -4,6 +4,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider.PlatformInstance do
 
   schema "lti_1p3_platform_instances" do
     field(:guid, :string)
+    field(:status, Ecto.Enum, values: [:active, :deleted], default: :active)
     field(:name, :string)
     field(:description, :string)
     field(:client_id, :string)
@@ -21,6 +22,7 @@ defmodule Lti_1p3.DataProviders.EctoProvider.PlatformInstance do
     platform_instance
     |> cast(attrs, [
       :guid,
+      :status,
       :name,
       :description,
       :client_id,
