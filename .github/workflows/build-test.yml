@@ -39,4 +39,6 @@ jobs:
         run: mix clean && mix compile --warnings-as-errors
 
       - name: ▶️ Run tests
-        run: mix test
+        run: |
+          mix test.ecto.reset
+          mix test --trace
