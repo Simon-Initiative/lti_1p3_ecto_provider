@@ -10,8 +10,11 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-# Ensure the application is started
+# Ensure the application dependencies are started
 Application.ensure_all_started(:lti_1p3_ecto_provider)
+
+# Start the repo manually since the application no longer auto-starts
+{:ok, _} = Lti_1p3.DataProviders.EctoProvider.Repo.start_link()
 
 alias Lti_1p3.DataProviders.EctoProvider
 alias Lti_1p3.DataProviders.EctoProvider.Repo

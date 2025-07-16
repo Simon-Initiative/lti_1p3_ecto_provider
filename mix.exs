@@ -32,8 +32,7 @@ defmodule Lti1p3EctoProvider.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
-      mod: {Lti1p3EctoProvider.Application, []}
+      extra_applications: [:logger]
     ]
   end
 
