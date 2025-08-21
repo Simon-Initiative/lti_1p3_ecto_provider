@@ -14,7 +14,7 @@ The package can be installed by adding `lti_1p3_ecto_provider` to your list of d
 ```elixir
 def deps do
   [
-    {:lti_1p3_ecto_provider, "~> 0.9"}
+    {:lti_1p3_ecto_provider, "~> 0.10"}
   ]
 end
 ```
